@@ -56,3 +56,5 @@ def play_song(token, song_uri):
 t = get_token()
 #search_for_item(t, "tzuyu")
 #play_song(t, 'spotify:track:25qp5LiSuet6rvl950jrGD')
+
+#get auth code to control play/pause

@@ -30,10 +30,10 @@ def get_auth_header(token):
     return {"Authorization": "Bearer " + token}
 
 
-def search_for_track(token, track):
+def search_for_track(token, track, qt):
     url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(token)
-    query = f"?q={track}&type=track&limit=1"
+    query = f"?q={track}&type=track&limit=" + qt
 
     query_url = url + query
     result = get(query_url, headers=headers)
@@ -41,10 +41,10 @@ def search_for_track(token, track):
     #print(json_result)
     return json_result
 
-def search_for_item(token, search_item):
+def search(token, search_item, qt):
     url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(token)
-    query = f"?q={search_item}&type=track,artist&limit=1"
+    query = f"?q={search_item}&type=track,artist&limit=" + qt
 
     query_url = url + query
     result = get(query_url, headers=headers)
@@ -81,9 +81,12 @@ def print_tracks_pretty(search_result_json):
         print(f"   URL: {track_url}")
         print("-" * 40)
 
-t = get_token()
-search = input("Enter your search:")
-ret = search_for_track(t, search)
-print_tracks_pretty(ret)
 
-#play_song(t, 'spotify:track:25qp5LiSuet6rvl950jrGD')
+if __name__ == "__main__":
+    t = get_token()
+    s = input("Enter your search:")
+    qt = input("How many results:")
+    ret = search_for_track(t, s, qt)
+    print_tracks_pretty(ret)
+
+    #play_song(t, 'spotify:track:25qp5LiSuet6rvl950jrGD')
